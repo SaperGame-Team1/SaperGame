@@ -28,23 +28,13 @@ public class CellBoardGenerator {
             cell[bombPlacesRow[i]][bombPlacesCol[i]].setABomb(true);
         }
 
-        for (int i = 0; i < cell.length; i++) {
-            for (int j = 0; j < cell.length; j++) {
-                if (!cell[i][j].isABomb()) {
-                    int numOfBombsAround = 0;
-                    for (int k = -1; k < 2; k++) {
-                        for (int l = -1; l < 2; l++) {
-                            if (cell[i + k][j + l].isABomb()) numOfBombsAround++;
-                            cell[i][j].setBombsAround(numOfBombsAround);
-                        }
-                    }
-                }
+        bombsAround(cell);
 
-            }
-        }
         this.cell = cell;
         return cell;
     }
+
+
 
     public String[][] generateCellsDisplay(){
 
@@ -64,7 +54,7 @@ public class CellBoardGenerator {
                     display[i][j] = "X";
                 } else display[i][j] = cell[i][j].getBombsAround().toString();
             }
-            
+
         }
 
 
@@ -95,5 +85,34 @@ public class CellBoardGenerator {
 
 
         return display;
+    }
+
+    private void bombsAround(Cell[][] cell) {
+        for (int i = 1; i < cell.length-1; i++) {
+            for (int j = 1; j < cell.length-1; j++) {
+                if (!cell[i][j].isABomb()) {
+                    int numOfBombsAround = 0;
+                    for (int k = -1; k < 2; k++) {
+                        for (int l = -1; l < 2; l++) {
+                            if (cell[i + k][j + l].isABomb()) numOfBombsAround++;
+                            cell[i][j].setBombsAround(numOfBombsAround);
+                        }
+                    }
+                }
+
+            }
+        }
+        for (int i = 1; i < cell.length-1; i++) {
+                if (!cell[i][0].isABomb()) {
+                    int numOfBombsAround = 0;
+                    for (int k = -1; k < 2; k++) {
+                        for (int l = 0; l < 2; l++) {
+                            if (cell[i + k][0+l].isABomb()) numOfBombsAround++;
+                            cell[i][0+l].setBombsAround(numOfBombsAround);
+                        }
+                    }
+                }
+
+        }
     }
 }
