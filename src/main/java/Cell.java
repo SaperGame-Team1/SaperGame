@@ -1,7 +1,7 @@
 public class Cell {
 
-    boolean isABomb;
-    Integer bombsAround;
+    private boolean isABomb;
+    private Integer bombsAround;
 
     public boolean isABomb() {
         return isABomb;

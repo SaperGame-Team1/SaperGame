@@ -6,7 +6,8 @@ public class MineSweeper {
     public void play(Difficulty difficulty) {
         CellBoardGenerator cellBoardGenerator = new CellBoardGenerator();
         cellBoardGenerator.generateCells(difficulty);
-
+        cellBoardGenerator.generateCellsDisplay();
     }
+
 
 }
